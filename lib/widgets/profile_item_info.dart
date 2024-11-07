@@ -1,48 +1,51 @@
 import 'package:flutter/material.dart';
 
 class ProfileItemInfo extends StatelessWidget {
-  const ProfileItemInfo({super.key, required this.icon, required this.lable,
-   required this.value, required this.showEditIcon,
-    required this.iconColor, this.onEditPressed});
-
+  const ProfileItemInfo(
+      {super.key,
+      required this.icon,
+      required this.label,
+      required this.value,
+      this.showEditIcon = false,
+      this.onEditPressed,
+      required this.iconColor});
   final IconData icon;
-  final String lable;
-  final String value;
+  final String label, value;
   final bool showEditIcon;
-  final VoidCallbackAction? onEditPressed;
+  final VoidCallback? onEditPressed;
   final Color iconColor;
-
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         SizedBox(
-          width: MediaQuery.of(context).size.width/3,
+          width: MediaQuery.of(context).size.width / 3,
           child: Row(
             children: [
-              Icon(icon, color: iconColor),
-              const SizedBox(width: 8,),
+              Icon(
+                icon,
+                color: iconColor,
+              ),
+              const SizedBox(
+                width: 8,
+              ),
               Text(
-                lable,
-                 style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold
-                 ),
-              )
+                label,
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
             ],
           ),
         ),
         Expanded(
-          child: Text(
-            ': $value',
-            style: const TextStyle(fontSize: 18),
-          ),
-        ),
+            child: Text(
+          ': $value',
+          style: const TextStyle(fontSize: 18),
+        )),
         if (showEditIcon)
           InkWell(
             onTap: onEditPressed,
             child: const Icon(Icons.edit),
-          ),
+          )
       ],
     );
   }
