@@ -4,67 +4,63 @@ import 'package:wisata_candi/screens/detail_screen.dart';
 
 import '../models/candi.dart';
 
-class ItemCard extends StatelessWidget {
-  // TODO: 1: Deklarasi Variable.
-  const ItemCard({super.key, required this.candi});
+class ItemCard extends StatefulWidget {
+  //TODO 1. Deklarasikan variabel yg dibutuhkan dan pasang pada konstruktor
   final Candi candi;
+  const ItemCard({super.key, required this.candi});
+
+  @override
+  State<ItemCard> createState() => _ItemCardState();
+}
+
+class _ItemCardState extends State<ItemCard> {
   @override
   Widget build(BuildContext context) {
+    //TODO 6. Implementasi Routing ke DetailScreen
     return InkWell(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => DetailScreen(candi: candi)
-          )
-        );
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => DetailScreen(candi: widget.candi)));
       },
       child: Card(
-        // TODO: 2: Tetapkan parameter shape, margin, elevation, dari Card.
+        //TODO 2. Tetapkan parameter shape, margin, dan elevation dari cari
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         margin: EdgeInsets.all(4),
         elevation: 1,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // TODO: 3: Buat image sebagai child dari column.
+            //TODO 3. Buat image sebagai anak dari column
             Expanded(
+              // TODO 7. Implementasi Hero Animation
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15),
-                child: CachedNetworkImage(
-                  imageUrl: candi.imageUrls[0],
+                child: Image.asset(
+                  widget.candi.imageAsset,
                   width: double.infinity,
-                  height: 120,
-                  fit : BoxFit.cover,
-                  placeholder: (context,
-                      url) => Container(
-                    width: 120,
-                    height: 120,
-                    color: Colors.deepPurple[50],
-                  ),
-                  errorWidget: (context, url, error) =>
-                  const Icon(
-                    Icons.error,
-                  ),
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
-            // TODO: 4: Buat text sebagai child dari column.
+            //TODO 4. Buat text sebagai anak dari column
             Padding(
               padding: const EdgeInsets.only(left: 16, top: 8),
               child: Text(
-                candi.name,
+                widget.candi.name,
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
-            // TODO: 5: Buat text sebagai child dari column.
+            //TODO 5. Buat text sebagai anak dari column
             Padding(
               padding: const EdgeInsets.only(left: 16, top: 8),
               child: Text(
-                candi.type,
-                style: const TextStyle(
-                  fontSize: 12,
-                ),
+                widget.candi.type,
+                style: const TextStyle(fontSize: 12),
               ),
             )
           ],
@@ -72,5 +68,4 @@ class ItemCard extends StatelessWidget {
       ),
     );
   }
-  
 }
